@@ -35,16 +35,6 @@ namespace BuberBreakfast.Models
 
         public static ErrorOr<Breakfast> Create(string name, string description, DateTime startDateTime, DateTime endDateTime, List<string> savory, List<string> sweet, Guid? id = null)
         {
-            var errors = new List<Error>();
-
-            if (name.Length is < MinNameLength or > MaxNameLength)
-                errors.Add(BreakfastErrors.InvalidName);
-
-            if (description.Length is < MinDescriptionLength or > MaxDescriptionLength)
-                errors.Add(BreakfastErrors.InvalidDescription);
-
-            if (errors.Count > 0) return errors;
-
             return new Breakfast(id ?? Guid.NewGuid(), name, description, startDateTime, endDateTime, DateTime.UtcNow, savory, sweet);
         }
 
